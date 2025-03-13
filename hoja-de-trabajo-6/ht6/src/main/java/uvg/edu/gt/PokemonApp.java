@@ -168,14 +168,33 @@ public class PokemonApp {
         pokemonMap.put(pokemon.getName(), pokemon);
     }
 
-    /** Agrega un Pokémon a la colección del usuario. */
+    /** Agrega un Pokémon a la colección del usuario.
     public static boolean addPokemonToCollection(String name) {
         if (!pokemonMap.containsKey(name)) return false;
         Pokemon pokemon = pokemonMap.get(name);
         if (userCollection.contains(pokemon)) return false;
         userCollection.add(pokemon);
         return true;
+    }*/
+    public static boolean addPokemonToCollection(String name) {
+        if (!pokemonMap.containsKey(name)) {
+            System.out.println("Pokémon no encontrado.");
+            return false; // No se puede agregar si no existe en el dataset
+        }
+
+        Pokemon pokemon = pokemonMap.get(name);
+
+        // Verificar si el Pokémon ya está en la colección
+        if (userCollection.stream().anyMatch(p -> p.getName().equalsIgnoreCase(name))) {
+            System.out.println("Este Pokémon ya está en tu colección.");
+            return false; // Retorna falso si el Pokémon ya existe
+        }
+
+        userCollection.add(pokemon);
+        System.out.println("Pokémon agregado a la colección.");
+        return true;
     }
+
 
     /** Muestra los datos de un Pokémon específico. */
     public static void showPokemonData(String name) {

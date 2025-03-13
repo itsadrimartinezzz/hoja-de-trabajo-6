@@ -16,15 +16,16 @@ class PokemonTest {
 
     @Test
     void testAddPokemonToCollection() {
-        // Intentar agregar Bulbasaur, debe ser exitoso
+        // Primera vez que se agrega, debe ser exitoso (true)
         assertTrue(PokemonApp.addPokemonToCollection("Bulbasaur"));
 
-        // Intentar agregar Bulbasaur nuevamente, debe fallar
+        // Segunda vez que se intenta agregar el mismo, debe fallar (false)
         assertFalse(PokemonApp.addPokemonToCollection("Bulbasaur"));
 
-        // Intentar agregar un Pokémon que no está en el dataset
-        assertFalse(PokemonApp.addPokemonToCollection("Pikachu")); // Solo si Pikachu no está en el CSV
+        // Intentar agregar un Pokémon que no está en el dataset, debe fallar (false)
+        assertFalse(PokemonApp.addPokemonToCollection("Pikachu")); // Asegúrate de que Pikachu no esté en el CSV
     }
+
 
     @Test
     void testSearchPokemonByAbility() {
