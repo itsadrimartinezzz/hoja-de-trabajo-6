@@ -14,6 +14,15 @@ public class PokemonApp {
     // Mapa donde se almacenarán los Pokémon cargados desde el archivo CSV.
     private static Map<String, Pokemon> pokemonMap;
 
+    /**
+     * Método auxiliar para inicializar `pokemonMap` en pruebas unitarias.
+     * En producción, esto lo hace el usuario al seleccionar el tipo de `Map`.
+     */
+    public static void initializePokemonMapForTesting() {
+        pokemonMap = new HashMap<>();  // Se usa HashMap por defecto en pruebas
+    }
+
+
     // Lista donde el usuario puede agregar los Pokémon que desee.
     private static List<Pokemon> userCollection = new ArrayList<>(); // Se usa ArrayList por su acceso rápido O(1)
 
