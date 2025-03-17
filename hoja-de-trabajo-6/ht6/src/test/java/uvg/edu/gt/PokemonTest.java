@@ -16,15 +16,34 @@ class PokemonTest {
 
     @Test
     void testAddPokemonToCollection() {
-        // Primera vez que se agrega, debe ser exitoso (true)
-        assertTrue(PokemonApp.addPokemonToCollection("Bulbasaur"));
+        // Primera vez que se agrega "Bulbasaur", debe ser exitoso (true)
+        assertTrue(PokemonApp.addPokemonToCollection("Bulbasaur"),
+                "No se pudo agregar Bulbasaur la primera vez.");
 
-        // Segunda vez que se intenta agregar el mismo, debe fallar (false)
-        assertFalse(PokemonApp.addPokemonToCollection("Bulbasaur"));
+        // Segunda vez que se intenta agregar "Bulbasaur", debe fallar (false)
+        assertFalse(PokemonApp.addPokemonToCollection("Bulbasaur"),
+                "Bulbasaur debería ya estar en la colección del usuario.");
 
-        // Intentar agregar un Pokémon que no está en el dataset, debe fallar (false)
-        assertFalse(PokemonApp.addPokemonToCollection("Pikachu")); // Asegúrate de que Pikachu no esté en el CSV
+        // Verificar que "Bulbasaur" esté efectivamente en la colección del usuario
+        assertTrue(PokemonApp.getUserCollection().stream()
+                        .anyMatch(p -> p.getName().equalsIgnoreCase("Bulbasaur")),
+                "Bulbasaur no está en la colección del usuario después de agregarlo.");
+
+        // Intentar agregar un Pokémon inexistente como "FakePokemon", debe fallar (false)
+        assertFalse(PokemonApp.addPokemonToCollection("FakePokemon"),
+                "FakePokemon no debería poder ser agregado, ya que no existe en los datos.");
+
+        // Agregar "Pikachu" a la colección, debe ser exitoso (true)
+        assertTrue(PokemonApp.addPokemonToCollection("Pikachu"),
+                "No se pudo agregar Pikachu a la colección del usuario.");
+
+        // Verificar que "Pikachu" esté efectivamente en la colección del usuario
+        assertTrue(PokemonApp.getUserCollection().stream()
+                        .anyMatch(p -> p.getName().equalsIgnoreCase("Pikachu")),
+                "Pikachu no está en la colección del usuario después de agregarlo.");
     }
+
+
 
 
     @Test
